@@ -32,46 +32,36 @@ export default function SelectedCollection() {
 
   return (
     <header>
-      {loading ? (
-          <div className="selected-collection">
-    <div className="selected-collection__description">
-      <Skeleton width="80px" height="80px" borderRadius="50%" />
-      <Skeleton width="300px" height="36px" borderRadius="6px" />
-      <Skeleton width="150px" height="20px" borderRadius="6px" />
-      <Skeleton width="200px" height="16px" borderRadius="6px" />
-      <Skeleton width="140px" height="44px" borderRadius="22px" />
-    </div>
-  </div>
-      ) : (
-        <div className="selected-collection">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={selectedCollection.thumbnail}
-            src={selectedCollection.videoLink}
-            className="selected-collection__bg"
+      <div className="selected-collection">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={SelectedItemThumbnail}
+          src={SelectedItemVideo}
+          className="selected-collection__bg"
+        />
+        <div className="selected-collection__description">
+          <img
+            src={SelectedItemLogo}
+            alt=""
+            className="selected-collection__logo"
           />
-      <div className="selected-collection__description">
-            <img src={selectedCollection.logo} alt="" className="selected-collection__logo" />
-            <h1 className="selected-collection__title">{selectedCollection.title}</h1>
-            <Link
-              to={`collection/${selectedCollection.creatorId}`}
-              className="selected-collection__author"
-            >
-              By {selectedCollection.creator}
-              <img src={VerifiedIcon} className="selected-collection__author__verified" />
-            </Link>
-            <div className="selected-collection__details">
-              {selectedCollection.amountOfItems} items · {selectedCollection.floorPrice} ETH
-            </div>
-            <Link
-              to={`collection/${selectedCollection.collectionId}`}
-              className="selected-collection__button"
-            >
-              <div className="green-pulse"></div>
-              View Collection
+          <h1 className="selected-collection__title">
+            Coachella Throwback Merchandise Trunk
+          </h1>
+          <Link to={'/user'} className="selected-collection__author">
+            By Coachella
+            <img
+              src={VerifiedIcon}
+              className="selected-collection__author__verified"
+            />
+          </Link>
+          <div className="selected-collection__details">10 items · 3.4 ETH</div>
+          <Link to={'/collection'} className="selected-collection__button">
+            <div className="green-pulse"></div>
+            View Collection
           </Link>
         </div>
       </div>
