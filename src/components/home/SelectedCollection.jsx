@@ -4,8 +4,32 @@ import SelectedItemThumbnail from "../../assets/selected-collection-thumbnail.jp
 import SelectedItemLogo from "../../assets/selected-collection-logo.avif";
 import VerifiedIcon from "../../assets/verified.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Skeleton from "../ui/Skeleton.jsx";
+import { useState, useEffect } from "react";
 
 export default function SelectedCollection() {
+
+  const [selectedCollection, setSelectedCollection] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  async function fetchSelectedCollection() {
+    setLoading(true);
+    const { data } = await axios.get(
+      "https://remote-internship-api-production.up.railway.app/selectedCollection"
+    );
+
+    const collections = data.data;
+
+    setSelectedCollection(collections);
+    setLoading(false);  
+
+  }
+
+  useEffect(() => {
+    fetchSelectedCollection();
+  }, []);
+
   return (
     <header>
       <div className="selected-collection">
@@ -41,6 +65,8 @@ export default function SelectedCollection() {
           </Link>
         </div>
       </div>
+      )}
     </header>
   );
 }
+
