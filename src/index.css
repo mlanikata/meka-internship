@@ -520,6 +520,10 @@ html {
   width: calc((100% / 6) - 16px + (16px / 6));
 }
 
+.new-collections__body .collection-column {
+  width: 100%;
+}
+
 .collection {
   width: 100%;
   border-radius: 12px;
@@ -581,6 +585,27 @@ html {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
+}
+
+.new-collections__body .swiper-button-next,
+.new-collections__body .swiper-button-prev {
+  --swiper-navigation-size: 12px;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  color: rgb(60, 60, 60);
+  top: 90px; /* vertical center of the 180px-tall .collection__img */
+  margin-top: 0;
+}
+
+.new-collections__body .swiper-button-next {
+  right: 8px;
+}
+
+.new-collections__body .swiper-button-prev {
+  left: 8px;
 }
 
 /* Footer */

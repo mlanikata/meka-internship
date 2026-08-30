@@ -1,10 +1,9 @@
 import React from "react";
 import VerifiedIcon from "../../assets/verified.png";
-import TrendingCollection from "../../assets/trending-collection.avif";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Skeleton from "../ui/Skeleton.jsx";
-import { useState, useEffect } from "react";
 
 export default function Trending() {
   const [trendingCollections, setTrendingCollection] = useState(null);
@@ -51,33 +50,31 @@ export default function Trending() {
               </div>
               <div className="trending-column__body">
                 {loading
-                  ? new Array(5)
-                      .fill(0)
-                      .map((_, index) => (
-                         <div key={index} className="trending-collection">
-        <div className="trending-collection__rank">
-          <Skeleton width="20px" height="20px" borderRadius="4px" />
-        </div>
-        <div className="trending-collection__collection">
-          <figure className="trending-collection__img__wrapper">
-            <Skeleton width="40px" height="40px" borderRadius="50%" />
-          </figure>
-          <div className="trending-collection__name">
-            <Skeleton width="120px" height="16px" borderRadius="4px" />
-          </div>
-        </div>
-        <div className="trending-collection__price">
-          <Skeleton width="60px" height="16px" borderRadius="4px" />
-        </div>
-        <div className="trending-collection__volume">
-          <Skeleton width="60px" height="16px" borderRadius="4px" />
-        </div>
-      </div>
-    ))
+                  ? new Array(5).fill(0).map((_, index) => (
+                      <div key={index} className="trending-collection">
+                        <div className="trending-collection__rank">
+                          <Skeleton width="20px" height="20px" borderRadius="4px" />
+                        </div>
+                        <div className="trending-collection__collection">
+                          <figure className="trending-collection__img__wrapper">
+                            <Skeleton width="40px" height="40px" borderRadius="50%" />
+                          </figure>
+                          <div className="trending-collection__name">
+                            <Skeleton width="120px" height="16px" borderRadius="4px" />
+                          </div>
+                        </div>
+                        <div className="trending-collection__price">
+                          <Skeleton width="60px" height="16px" borderRadius="4px" />
+                        </div>
+                        <div className="trending-collection__volume">
+                          <Skeleton width="60px" height="16px" borderRadius="4px" />
+                        </div>
+                      </div>
+                    ))
                   : trendingCollections.slice(0, 5).map((collection, index) => (
                       <Link
                         to={"/collection"}
-                        key={collection.id ?? index}
+                        key={collection.collectionId ?? index}
                         className="trending-collection"
                       >
                         <div className="trending-collection__rank">
@@ -106,7 +103,7 @@ export default function Trending() {
                         </div>
                         <div className="trending-collection__volume">
                           <span className="trending-collection__volume__span">
-                            {collection.totalvolume} ETH
+                            {collection.totalVolume} ETH
                           </span>
                         </div>
                       </Link>
@@ -127,29 +124,27 @@ export default function Trending() {
               </div>
               <div className="trending-column__body">
                 {loading
-                  ? new Array(5)
-                      .fill(0)
-                      .map((_, index) => (
-                       <div key={index} className="trending-collection">
-        <div className="trending-collection__rank">
-          <Skeleton width="20px" height="20px" borderRadius="4px" />
-        </div>
-        <div className="trending-collection__collection">
-          <figure className="trending-collection__img__wrapper">
-            <Skeleton width="40px" height="40px" borderRadius="50%" />
-          </figure>
-          <div className="trending-collection__name">
-            <Skeleton width="120px" height="16px" borderRadius="4px" />
-          </div>
-        </div>
-        <div className="trending-collection__price">
-          <Skeleton width="60px" height="16px" borderRadius="4px" />
-        </div>
-        <div className="trending-collection__volume">
-          <Skeleton width="60px" height="16px" borderRadius="4px" />
-        </div>
-      </div>
-    ))
+                  ? new Array(5).fill(0).map((_, index) => (
+                      <div key={index} className="trending-collection">
+                        <div className="trending-collection__rank">
+                          <Skeleton width="20px" height="20px" borderRadius="4px" />
+                        </div>
+                        <div className="trending-collection__collection">
+                          <figure className="trending-collection__img__wrapper">
+                            <Skeleton width="40px" height="40px" borderRadius="50%" />
+                          </figure>
+                          <div className="trending-collection__name">
+                            <Skeleton width="120px" height="16px" borderRadius="4px" />
+                          </div>
+                        </div>
+                        <div className="trending-collection__price">
+                          <Skeleton width="60px" height="16px" borderRadius="4px" />
+                        </div>
+                        <div className="trending-collection__volume">
+                          <Skeleton width="60px" height="16px" borderRadius="4px" />
+                        </div>
+                      </div>
+                    ))
                   : trendingCollections.slice(5, 10).map((collection, index) => (
                       <Link
                         to={"/collection"}
@@ -170,10 +165,10 @@ export default function Trending() {
                           <div className="trending-collection__name">
                             {collection.title}
                           </div>
-                            <img
-                              src={VerifiedIcon}
-                              className="trending-collection__verified"
-                            />
+                          <img
+                            src={VerifiedIcon}
+                            className="trending-collection__verified"
+                          />
                         </div>
                         <div className="trending-collection__price">
                           <span className="trending-collection__price__span">
@@ -182,7 +177,7 @@ export default function Trending() {
                         </div>
                         <div className="trending-collection__volume">
                           <span className="trending-collection__volume__span">
-                            {collection.totalvolume} ETH
+                            {collection.totalVolume} ETH
                           </span>
                         </div>
                       </Link>
@@ -195,5 +190,3 @@ export default function Trending() {
     </section>
   );
 }
-
-
