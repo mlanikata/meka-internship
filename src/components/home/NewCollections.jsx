@@ -1,42 +1,95 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import Skeleton from '../ui/Skeleton.jsx';
+import { useState, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 
 export default function NewCollections() {
+  const [newCollections, setNewCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function fetchNewCollections() {
+    setLoading(true);
+    const { data } = await axios.get(
+      'https://remote-internship-api-production.up.railway.app/newCollections',
+    );
+
+    const collections = data.data;
+
+    setNewCollections(collections);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    fetchNewCollections();
+  }, []);
+
   return (
     <section id="new-collections">
       <div className="container">
         <div className="row">
           <h2 className="new-collections__title">New Collections</h2>
           <div className="new-collections__body">
-            {new Array(6).fill(0).map((_, index) => (
-              <div className="collection-column">
-                <Link to="/collection" key={index} className="collection">
-                  <img
-                    src="https://i.seadn.io/gcs/files/a5414557ae405cb6233b4e2e4fa1d9e6.jpg?auto=format&dpr=1&w=1920"
-                    alt=""
-                    className="collection__img"
-                  />
-                  <div className="collection__info">
-                    <h3 className="collection__name">Bored Ape Kennel Club</h3>
-                    <div className="collection__stats">
-                      <div className="collection__stat">
-                        <span className="collection__stat__label">Floor</span>
-                        <span className="collection__stat__data">0.46 ETH</span>
-                      </div>
-                      <div className="collection__stat">
-                        <span className="collection__stat__label">
-                          Total Volume
-                        </span>
-                        <span className="collection__stat__data">281K ETH</span>
-                      </div>
-                    </div>
+            <Swiper modules={[Navigation]} navigation spaceBetween={16} slidesPerView={6} loop>
+            {loading
+              ? new Array(6).fill(0).map((_, index) => (
+                <SwiperSlide key={index}>
+                  <div className="collection-column">
+                    <Skeleton width="100%" height="180px" />
                   </div>
-                </Link>
-              </div>
-            ))}
+                  </SwiperSlide>
+                ))
+              : newCollections.map((collection) => (
+                <SwiperSlide key={collection.collectionId}>
+                  <div className="collection-column">
+                    <Link
+                      to={`/collection/${collection.collectionId}`}
+                      className="collection"
+                    >
+                      <img
+                        src={collection.imageLink}
+                        alt={collection.title}
+                        className="collection__img"
+                      />
+                      <div className="collection__info">
+                        <h3 className="collection__name">{collection.title}</h3>
+                        <div className="collection__stats">
+                          <div className="collection__stat">
+                            <span className="collection__stat__label">
+                              Floor
+                            </span>
+                            <span className="collection__stat__data">
+                              {Number(collection.floor).toFixed(2)}
+                            </span>
+                          </div>
+                          <div className="collection__stat">
+                            <span className="collection__stat__label">
+                              Total Volume
+                            </span>
+                            <span className="collection__stat__data">
+                              {collection.totalVolume} ETH
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                  </SwiperSlide>
+                ))}
+          </Swiper>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+  
+
+
+
+

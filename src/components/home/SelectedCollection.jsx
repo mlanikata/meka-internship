@@ -65,7 +65,7 @@ export default function SelectedCollection() {
           </Link>
         </div>
       </div>
-      )}
+      
     </header>
   );
 }
