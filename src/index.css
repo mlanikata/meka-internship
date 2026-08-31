@@ -520,7 +520,8 @@ html {
   width: calc((100% / 6) - 16px + (16px / 6));
 }
 
-.new-collections__body .collection-column {
+.new-collections__body .collection-column,
+.popular-collections__body .collection-column {
   width: 100%;
 }
 
@@ -588,7 +589,9 @@ html {
 }
 
 .new-collections__body .swiper-button-next,
-.new-collections__body .swiper-button-prev {
+.new-collections__body .swiper-button-prev,
+.popular-collections__body .swiper-button-next,
+.popular-collections__body .swiper-button-prev{
   --swiper-navigation-size: 12px;
   width: 32px;
   height: 32px;
@@ -600,11 +603,13 @@ html {
   margin-top: 0;
 }
 
-.new-collections__body .swiper-button-next {
+.new-collections__body .swiper-button-next, 
+.popular-collections__body .swiper-button-next{
   right: 8px;
 }
 
-.new-collections__body .swiper-button-prev {
+.new-collections__body .swiper-button-prev,
+.popular-collections__body .swiper-button-prev {
   left: 8px;
 }
 
